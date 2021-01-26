@@ -1,0 +1,40 @@
+#create database artists;
+
+use artists;
+
+						
+create table artists (artist_id INT NOT NULL AUTO_INCREMENT,
+                      country_id INT,
+					  genre_id INT,
+					  art_site_url varchar(100),
+					  constraint PK_artists PRIMARY KEY clustered 
+                      (
+                         artist_id ASC 
+                      ),
+					  FOREIGN KEY (country_id) REFERENCES countries(country_id),
+					  FOREIGN KEY (genre_id) REFERENCES genres(genre_id)
+                      );
+                      
+create table person (artist_id INT NOT NULL AUTO_INCREMENT,
+                     first_name varchar(50),
+					 last_name varchar(50),
+					 sex varchar(100),
+					 b_day date,
+					 constraint PK_person PRIMARY KEY clustered 
+                      (
+                         artist_id ASC 
+                      ));
+					  
+alter table person
+		add constraint fk_id
+        foreign key(artist_id)
+	references artists(artist_id)
+	
+	
+	
+create table albums (album_id INT NOT NULL AUTO_INCREMENT ,
+                     artist_id INT,
+					 album_title varchar(50),
+					 album_year varchar(100),
+					 PRIMARY KEY (album_id),
+					 FOREIGN KEY (artist_id) REFERENCES artists(artist_id));
